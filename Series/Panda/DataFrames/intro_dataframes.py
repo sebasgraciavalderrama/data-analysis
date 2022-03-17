@@ -25,8 +25,8 @@ print(new_df)
 df.drop('NEW', axis=1, inplace=True)
 print(df)
 # ----- Delete a row from the DataFrame
-df.drop('E', axis=0, inplace=True)
-print(df)
+#df.drop('E', axis=0, inplace=True)
+#print(df)
 # ----- Shape of the DataFrame
 print(df.shape) # Tuple
 # ----- Selecting columns
@@ -39,4 +39,36 @@ print(df.iloc[0])
 print(df.loc['B','Y']) # Slicing
 print(df.loc[['A', 'B'], ['W', 'Y']]) # Slicing
 
+# --- PART 2
+booldf = df > 0
 
+print(booldf)
+print(df[booldf]) # Conditional selection
+print(df[df > 0])
+
+print(df['W'] > 0)
+print(df[df['W'] > 0])
+
+print(df[df['Z'] < 0])
+
+resultdf = df[df['W'] > 0]
+print(resultdf)
+print(resultdf['X'])
+
+print(df[df['W'] > 0][['Y', 'X']])
+
+boolser = df['W'] > 0
+result = df[boolser]
+mycols = ['Y', 'X']
+print(result[mycols])
+
+# --- Multiple conditions
+multicond_and = df[(df['W'] > 0) & (df['Y'] > 1)]
+multicond_or = df[(df['W'] > 0) | (df['Y'] > 1)]
+
+# --- Resetting or setting indexes
+print(df.reset_index())
+newind = 'CA NY WY OR CO'.split()
+df['States'] = newind
+print(df)
+print(df.set_index('States'))
